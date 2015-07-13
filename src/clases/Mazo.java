@@ -37,7 +37,7 @@ public class Mazo {
                 }
             }
         }
-
+        revolverMazo();
     }
 
     private void revolverMazo() {

@@ -12,6 +12,11 @@ public class Personas {
     public String nombre;
     public int dinero;
 
+    public Personas(String nombre, int dinero) {
+        this.nombre = nombre;
+        this.dinero = dinero;
+    }
+
    
     
 }

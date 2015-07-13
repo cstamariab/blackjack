@@ -16,8 +16,8 @@ public class blackjack {
     private boolean sacarCarta = true;
     public Mazo mazo;
 
-    public blackjack() {
-        this.mazo = new Mazo();
+    public blackjack(int cantidadJugadores) {
+        this.mazo = new Mazo(cantidadJugadores);
     }
 
     public void ganar(int total) {
@@ -28,30 +28,7 @@ public class blackjack {
 
     public void jugar() {
 
-        Carta carta = mazo.sacarCarta();
-        int total = 0;
-        System.out.println(carta.getNumero() + " " + carta.getPalo() + " " + mazo.getCartas().size());
-
-        while (sacarCarta) {
-            if (mazo.getCartas().size() > 0) {
-                Scanner in = new Scanner(System.in);
-                System.out.println("Desea sacar otra carta ?");
-
-                if (in.next().equals("si")) {
-
-                    System.out.println(mazo.sacarCarta().getNumero() + " " + mazo.sacarCarta().getPalo());
-                    total += mazo.sacarCarta().getNumero();
-                    ganar(total);
-                    sacarCarta = true;
-                } else {
-                    sacarCarta = false;
-                }
-            } else {
-                sacarCarta = false;
-            }
-
-        }
-
+       
     }
 
 }

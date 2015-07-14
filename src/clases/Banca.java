@@ -11,9 +11,11 @@ package clases;
  * @author Christian
  */
 public class Banca extends Personas {
-
+    private int puntoExtra;
+    
     public Banca(String nombre, int dinero) {
         super(nombre, dinero);
+        
     }
     
     

@@ -15,12 +15,22 @@ public class Jugador extends Personas {
 
     public static boolean retirarse = false;
     public ArrayList<Carta> manoJugador = null;
+    public int total ;
 
     public Jugador(String nombre, int dinero) {
         super(nombre, dinero);
         this.manoJugador = new ArrayList();
+        this.total = 0;
     }
 
+    public int getTotal() {
+        return total;
+    }
+
+    public int setTotal(int total) {
+       return this.total += total;
+    }
+    
     public ArrayList<Carta> getManoJugador() {
         return this.manoJugador;
     }

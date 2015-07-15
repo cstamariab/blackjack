@@ -20,11 +20,12 @@ public class blackjack {
     private boolean turno = true;
     static boolean otraCarta = false;
     private String manoString = "";
+    public int total;
 
     public Mazo mazo;
     public Carta carta;
 
-    private static Scanner kbr = new Scanner(System.in);
+    private static final Scanner kbr = new Scanner(System.in);
 
     public blackjack(int cantidadJugadores) {
         this.cantJugadores = cantidadJugadores;
@@ -45,33 +46,45 @@ public class blackjack {
                 this.manoJugador = this.jugadores.get(i).getManoJugador();
                 System.out.print("Su Mano es :");
                 for (Carta cartas : manoJugador) {
-                    this.manoString += cartas.getNumero() + " " + cartas.getPalo();
+                    this.manoString = cartas.getNumero() + " " + cartas.getPalo();
 
                 }
-                System.out.println(manoString);
 
-                otraCarta = true;
-                if (i == 0) {
-                    System.out.println("Desea sacar otra carta ?");
+                System.out.println(manoString);
+                System.out.println("Desea sacar otra carta ?");
+                kbr.nextLine();
+                String otra = kbr.next();
+                if (otra.equals("si")) {
+                    otraCarta = true;
                 }
                 while (otraCarta == true) {
-                    if (kbr.nextLine().equals("si")) {
-                        this.jugadores.get(i).getManoJugador().add(this.jugadores.get(i).sacarCarta(this.mazo));
-                        this.manoJugador = this.jugadores.get(i).getManoJugador();
-                        for (Carta cartas : manoJugador) {
-                            this.manoString = "";
-                            this.manoString += cartas.getNumero() + " " + cartas.getPalo() + " ";
-
-                        }
-                        System.out.println(manoString);
-                        System.out.println("Desea sacar otra carta ?");
+                    this.total = 0;
+                    this.jugadores.get(i).getManoJugador().add(this.jugadores.get(i).sacarCarta(this.mazo));
+                    this.manoJugador = this.jugadores.get(i).getManoJugador();
+                    for (Carta cartas : manoJugador) {
                         
-                    }else if(kbr.nextLine().equals("no"))
-                    {
-                        otraCarta =false;
-                        turno = false;
+                        System.out.print(cartas.getNumero() + " " + cartas.getPalo() + " ");
+                        System.out.println("");
+                        this.total += cartas.getNumero();
+
                     }
-                    
+                    System.out.println("Total: " + this.total);
+
+                    if (total > 21) {
+                        System.out.println("PERDISTE");
+                        otraCarta = false;
+                        turno = false;
+                    } else {
+                        System.out.println("Desea sacar otra carta ?");
+
+                        if (kbr.next().equals("si")) {
+                            otraCarta = true;
+                        } else {
+                            this.jugadores.get(i).setTotal(total);
+                            System.out.println("Total 2: " + this.jugadores.get(i).getTotal());
+                            otraCarta = false;
+                        }
+                    }
                 }
                 turno = false;
             }

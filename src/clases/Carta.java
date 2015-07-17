@@ -5,7 +5,7 @@
  */
 
 package clases;
-
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -14,10 +14,17 @@ package clases;
 public class Carta {
    private String palo;
    private int numero;
+   public ImageIcon imagen ;
 
-    public Carta(String palo, int numero) {
+    public Carta(String palo, int numero,ImageIcon img) {
         this.palo = palo;
-        this.numero = numero;
+       this.numero = numero;
+       this.imagen = img;
+               
+    }
+
+    public ImageIcon getImagen() {
+        return imagen;
     }
     
     

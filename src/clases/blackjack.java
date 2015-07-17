@@ -35,11 +35,11 @@ public class blackjack {
     }
 
     public void jugar() {
-
+        
         for (int i = 0; i < this.jugadores.size(); i++) {
-            this.turno = true;
+            
             this.manoString = "";
-            while (turno) {
+            while (turno==true) {
                 System.out.println("Turno: " + this.jugadores.get(i).getNombre());
                 System.out.println("Sacando Carta..");
                 this.jugadores.get(i).getManoJugador().add(this.jugadores.get(i).sacarCarta(this.mazo));
@@ -69,24 +69,10 @@ public class blackjack {
 
                     }
                     System.out.println("Total: " + this.total);
-
-                    if (total > 21) {
-                        System.out.println("PERDISTE");
-                        otraCarta = false;
-                        turno = false;
-                    } else {
-                        System.out.println("Desea sacar otra carta ?");
-
-                        if (kbr.next().equals("si")) {
-                            otraCarta = true;
-                        } else {
-                            this.jugadores.get(i).setTotal(total);
-                            System.out.println("Total 2: " + this.jugadores.get(i).getTotal());
-                            otraCarta = false;
-                        }
-                    }
+                    otraCarta= false;
+                    turno = false;
                 }
-                turno = false;
+                
             }
         }
 

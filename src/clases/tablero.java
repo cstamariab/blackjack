@@ -5,6 +5,9 @@
  */
 package clases;
 
+import java.awt.event.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,12 +15,101 @@ package clases;
  */
 public class tablero extends javax.swing.JFrame {
 
+    int cantJugadores;
+    ArrayList<Carta> manoJugador;
+    ArrayList<Jugador> jugadores;
+    Mazo mazo;
+    boolean turno = true;
+    int turnoJugador;
+
     /**
      * Creates new form tablero
      */
-    Mazo mazo ;
     public tablero() {
+
         initComponents();
+
+        labelJugador2.setVisible(false);
+        labelJugador3.setVisible(false);
+        labelJugador4.setVisible(false);
+        labelJugador5.setVisible(false);
+
+        this.cantJugadores = cantidadJugadores();
+        this.mazo = new Mazo(this.cantJugadores);
+        this.jugadores = addJugadores();
+        jugar();
+
+    }
+
+    public void jugar() {
+        for (int i = 0; i < this.jugadores.size(); i++) {
+            labelturnoJugador.setText(this.jugadores.get(i).getNombre());
+            while (turno == true) {
+                manoJugador = jugadores.get(i).getManoJugador();
+                dibujarManoJugador(manoJugador);
+            }
+        }
+    }
+
+    public void dibujarManoJugador(ArrayList<Carta> cartas) {
+        switch (cartas.size()) {
+            case 1:
+                carta1.setIcon(cartas.get(0).getImagen());
+                break;
+            case 2:
+                carta1.setIcon(cartas.get(0).getImagen());
+                carta2.setIcon(cartas.get(1).getImagen());
+                break;
+            case 3:
+                carta1.setIcon(cartas.get(0).getImagen());
+                carta2.setIcon(cartas.get(1).getImagen());
+                carta3.setIcon(cartas.get(2).getImagen());
+                break;
+            case 4:
+                carta1.setIcon(cartas.get(0).getImagen());
+                carta2.setIcon(cartas.get(1).getImagen());
+                carta3.setIcon(cartas.get(2).getImagen());
+                carta4.setIcon(cartas.get(3).getImagen());
+                break;
+            case 5:
+                carta1.setIcon(cartas.get(0).getImagen());
+                carta2.setIcon(cartas.get(1).getImagen());
+                carta3.setIcon(cartas.get(2).getImagen());
+                carta4.setIcon(cartas.get(3).getImagen());
+                carta5.setIcon(cartas.get(4).getImagen());
+                break;
+        }
+    }
+
+    private ArrayList addJugadores() {
+
+        this.jugadores = new ArrayList();
+
+        for (int i = 0; i < this.cantJugadores; i++) {
+
+            this.jugadores.add(new Jugador("jugador " + i, 1000));
+        }
+        return this.jugadores;
+    }
+
+    private int cantidadJugadores() {
+        String n1 = JOptionPane.showInputDialog(null, "Ingrese Cantidad De Jugadores");
+        while (!isNumber(n1)) {
+            n1 = JOptionPane.showInputDialog(null,
+                    "Porfavor inserte solo Numeros !");
+        }
+        int r = new Integer(n1);
+        return r;
+
+    }
+
+    private static boolean isNumber(String n) {
+        try {
+            Integer.parseInt(n);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
     }
 
     /**
@@ -29,28 +121,93 @@ public class tablero extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Jugador1 = new javax.swing.JPanel();
+        labelJugadores = new javax.swing.JLabel();
+        valueJugadores = new javax.swing.JLabel();
+        labelJugador1 = new javax.swing.JLabel();
+        labelJugador2 = new javax.swing.JLabel();
+        labelJugador3 = new javax.swing.JLabel();
+        labelJugador4 = new javax.swing.JLabel();
+        labelJugador5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        btnNuevaCarta = new javax.swing.JButton();
+        panelTablero = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         carta1 = new javax.swing.JLabel();
         carta2 = new javax.swing.JLabel();
+        carta3 = new javax.swing.JLabel();
+        carta4 = new javax.swing.JLabel();
+        carta5 = new javax.swing.JLabel();
+        labelturnoJugador = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("BlackJack by Syxtem");
+        setBackground(new java.awt.Color(0, 153, 255));
+        setPreferredSize(new java.awt.Dimension(1024, 600));
+        setType(java.awt.Window.Type.POPUP);
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 0));
+        Jugador1.setBackground(new java.awt.Color(102, 102, 102));
 
-        carta1.setText("carta2");
-        carta1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                carta1MouseClicked(evt);
-            }
-        });
+        labelJugadores.setText("Jugadores en la Mesa : ");
 
-        carta2.setText("jLabel1");
-        carta2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                carta2MouseClicked(evt);
+        labelJugador1.setText("Jugador 1");
+
+        labelJugador2.setText("Jugador 2");
+
+        labelJugador3.setText("Jugador 3");
+
+        labelJugador4.setText("Jugador 4");
+
+        labelJugador5.setText("Jugador 5");
+
+        javax.swing.GroupLayout Jugador1Layout = new javax.swing.GroupLayout(Jugador1);
+        Jugador1.setLayout(Jugador1Layout);
+        Jugador1Layout.setHorizontalGroup(
+            Jugador1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Jugador1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Jugador1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Jugador1Layout.createSequentialGroup()
+                        .addComponent(labelJugadores)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(valueJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelJugador1)
+                    .addComponent(labelJugador2)
+                    .addComponent(labelJugador3)
+                    .addComponent(labelJugador4)
+                    .addComponent(labelJugador5))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        Jugador1Layout.setVerticalGroup(
+            Jugador1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Jugador1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(Jugador1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(labelJugadores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(valueJugadores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(labelJugador1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelJugador2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelJugador3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelJugador4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelJugador5)
+                .addContainerGap(135, Short.MAX_VALUE))
+        );
+
+        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+
+        btnNuevaCarta.setText("Sacar Carta ");
+        btnNuevaCarta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevaCartaActionPerformed(evt);
             }
         });
 
@@ -59,26 +216,78 @@ public class tablero extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(331, 331, 331)
-                .addComponent(carta1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(417, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(281, 281, 281)
-                    .addComponent(carta2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(467, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addComponent(btnNuevaCarta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(137, Short.MAX_VALUE)
-                .addComponent(carta1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(135, Short.MAX_VALUE)
-                    .addComponent(carta2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(46, 46, 46)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnNuevaCarta, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(212, Short.MAX_VALUE))
+        );
+
+        panelTablero.setBackground(new java.awt.Color(0, 102, 0));
+
+        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
+
+        jLabel1.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
+        jLabel1.setText("Mano del Jugador.");
+
+        labelturnoJugador.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(carta5, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(carta1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(carta2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(carta3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(carta4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(55, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelturnoJugador)
+                .addGap(107, 107, 107))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(labelturnoJugador))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(carta1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(carta2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(carta3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(carta5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(carta4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout panelTableroLayout = new javax.swing.GroupLayout(panelTablero);
+        panelTablero.setLayout(panelTableroLayout);
+        panelTableroLayout.setHorizontalGroup(
+            panelTableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        panelTableroLayout.setVerticalGroup(
+            panelTableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTableroLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jMenu1.setText("File");
@@ -93,25 +302,31 @@ public class tablero extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Jugador1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelTablero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Jugador1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(panelTablero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void carta1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_carta1MouseClicked
-        mazo = new Mazo(1);
-        carta1.setIcon(mazo.getCartas().get(0).getImagen());
-        
-    }//GEN-LAST:event_carta1MouseClicked
+    private void btnNuevaCartaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaCartaActionPerformed
+        this.manoJugador.add(this.jugadores.get(turnoJugador).sacarCarta(this.mazo));
+        dibujarManoJugador(manoJugador);
 
-    private void carta2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_carta2MouseClicked
-        carta2.setIcon(mazo.getCartas().get(1).getImagen());
-    }//GEN-LAST:event_carta2MouseClicked
+
+    }//GEN-LAST:event_btnNuevaCartaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,16 +342,21 @@ public class tablero extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(tablero.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tablero.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(tablero.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tablero.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(tablero.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tablero.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(tablero.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tablero.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -149,11 +369,27 @@ public class tablero extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Jugador1;
+    private javax.swing.JButton btnNuevaCarta;
     private javax.swing.JLabel carta1;
     private javax.swing.JLabel carta2;
+    private javax.swing.JLabel carta3;
+    private javax.swing.JLabel carta4;
+    private javax.swing.JLabel carta5;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel labelJugador1;
+    private javax.swing.JLabel labelJugador2;
+    private javax.swing.JLabel labelJugador3;
+    private javax.swing.JLabel labelJugador4;
+    private javax.swing.JLabel labelJugador5;
+    private javax.swing.JLabel labelJugadores;
+    private javax.swing.JLabel labelturnoJugador;
+    private javax.swing.JPanel panelTablero;
+    private javax.swing.JLabel valueJugadores;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package clases;
+
 import javax.swing.ImageIcon;
 
 /**
@@ -12,22 +12,28 @@ import javax.swing.ImageIcon;
  * @author Christian
  */
 public class Carta {
-   private String palo;
-   private int numero;
-   public ImageIcon imagen ;
 
-    public Carta(String palo, int numero,ImageIcon img) {
+    private String palo;
+    private int numero;
+    public ImageIcon imagen;
+    public int valor;
+
+    public Carta(String palo, int numero, ImageIcon img, int val) {
         this.palo = palo;
-       this.numero = numero;
-       this.imagen = img;
-               
+        this.numero = numero;
+        this.imagen = img;
+        this.valor = val;
+
+    }
+
+    public int getValor() {
+        return valor;
     }
 
     public ImageIcon getImagen() {
         return imagen;
     }
-    
-    
+
     public String getPalo() {
         return palo;
     }
@@ -43,9 +49,5 @@ public class Carta {
     public void setNumero(int numero) {
         this.numero = numero;
     }
-    
-   
-   
 
-    
 }

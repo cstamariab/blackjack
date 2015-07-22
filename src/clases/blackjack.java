@@ -16,14 +16,14 @@ public class blackjack {
     public ArrayList<Jugador> jugadores;
     public int cantJugadores;
     public ArrayList<Carta> manoJugador;
-    private boolean jugando = true;
+
     private boolean turno = true;
     static boolean otraCarta = false;
     private String manoString = "";
     public int total;
 
     public Mazo mazo;
-    public Carta carta;
+    
 
     private static final Scanner kbr = new Scanner(System.in);
 
@@ -32,14 +32,15 @@ public class blackjack {
         this.mazo = new Mazo(this.cantJugadores);
         this.jugadores = addJugadores();
         System.out.println("Se han agregado " + this.jugadores.size());
+
     }
 
     public void jugar() {
-        
+
         for (int i = 0; i < this.jugadores.size(); i++) {
-            
+
             this.manoString = "";
-            while (turno==true) {
+            while (turno == true) {
                 System.out.println("Turno: " + this.jugadores.get(i).getNombre());
                 System.out.println("Sacando Carta..");
                 this.jugadores.get(i).getManoJugador().add(this.jugadores.get(i).sacarCarta(this.mazo));
@@ -62,17 +63,17 @@ public class blackjack {
                     this.jugadores.get(i).getManoJugador().add(this.jugadores.get(i).sacarCarta(this.mazo));
                     this.manoJugador = this.jugadores.get(i).getManoJugador();
                     for (Carta cartas : manoJugador) {
-                        
+
                         System.out.print(cartas.getNumero() + " " + cartas.getPalo() + " ");
                         System.out.println("");
                         this.total += cartas.getNumero();
 
                     }
                     System.out.println("Total: " + this.total);
-                    otraCarta= false;
+                    otraCarta = false;
                     turno = false;
                 }
-                
+
             }
         }
 

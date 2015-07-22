@@ -20,7 +20,9 @@ public class Mazo {
     private ArrayList<Carta> baraja;
     private int cantidadJugadores;
     private int aleatorio;
-    static String palo2;
+    public String palo2;
+    public int val;
+
     public Mazo(int cantJugadores) {
 
         Random rnd = new Random();
@@ -48,8 +50,48 @@ public class Mazo {
                             palo2 = "3";
                             break;
                     }
-                    
-                    this.baraja.add(new Carta(palo, i, new ImageIcon(getClass().getResource("/IMG/" + i + "_" + palo2 + ".png"))));
+                    switch (i) {
+                        case 1:
+                            val = 1;
+                            break;
+                        case 2:
+                            val = 2;
+                            break;
+                        case 3:
+                            val = 3;
+                            break;
+                        case 4:
+                            val = 4;
+                            break;
+                        case 5:
+                            val = 5;
+                            break;
+                        case 6:
+                            val = 6;
+                            break;
+                        case 7:
+                            val = 7;
+                            break;
+                        case 8:
+                            val = 8;
+                            break;
+                        case 9:
+                            val = 9;
+                            break;
+                        case 10:
+                            val = 10;
+                            break;
+                        case 11:
+                            val = 10;
+                            break;
+                        case 12:
+                            val = 10;
+                            break;
+                        case 13:
+                            val = 10;
+                    }
+
+                    this.baraja.add(new Carta(palo, i, new ImageIcon(getClass().getResource("/IMG/" + i + "_" + palo2 + ".png")), val));
 
                 }
             }

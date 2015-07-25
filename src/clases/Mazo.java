@@ -36,20 +36,7 @@ public class Mazo {
             for (String palo : palos) {
 
                 for (int i = 1; i < 14; i++) {
-                    switch (palo) {
-                        case "diamantes":
-                            palo2 = "1";
-                            break;
-                        case "treboles":
-                            palo2 = "0";
-                            break;
-                        case "corazones":
-                            palo2 = "2";
-                            break;
-                        case "picas":
-                            palo2 = "3";
-                            break;
-                    }
+
                     switch (i) {
                         case 1:
                             val = 1;
@@ -91,7 +78,7 @@ public class Mazo {
                             val = 10;
                     }
 
-                    this.baraja.add(new Carta(palo, i,val));
+                    this.baraja.add(new Carta(palo, i, val));
 
                 }
             }

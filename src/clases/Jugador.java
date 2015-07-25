@@ -43,11 +43,7 @@ public class Jugador extends Personas {
         return dinero;
     }
 
-    public Carta sacarCarta(Mazo mazo) {
-
-        return mazo.getCartas().remove(0);
-
-    }
+   
 
     public int apostar(int apuesta) {
         return apuesta;

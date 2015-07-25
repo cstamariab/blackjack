@@ -17,6 +17,10 @@ public class Personas {
         this.dinero = dinero;
     }
 
-   
+    public Carta sacarCarta(Mazo mazo) {
+
+        return mazo.getCartas().remove(0);
+
+    }
     
 }

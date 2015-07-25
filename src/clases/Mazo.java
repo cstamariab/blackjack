@@ -91,7 +91,7 @@ public class Mazo {
                             val = 10;
                     }
 
-                    this.baraja.add(new Carta(palo, i, new ImageIcon(getClass().getResource("/IMG/" + i + "_" + palo2 + ".png")), val));
+                    this.baraja.add(new Carta(palo, i,val));
 
                 }
             }

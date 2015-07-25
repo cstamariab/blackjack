@@ -15,13 +15,13 @@ public class Carta {
 
     private String palo;
     private int numero;
-    public ImageIcon imagen;
+
     public int valor;
 
-    public Carta(String palo, int numero, ImageIcon img, int val) {
+    public Carta(String palo, int numero, int val) {
         this.palo = palo;
         this.numero = numero;
-        this.imagen = img;
+
         this.valor = val;
 
     }
@@ -30,9 +30,7 @@ public class Carta {
         return valor;
     }
 
-    public ImageIcon getImagen() {
-        return imagen;
-    }
+    
 
     public String getPalo() {
         return palo;

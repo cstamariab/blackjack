@@ -84,36 +84,58 @@ public class blackjack {
                     for (Carta cartas : manoJugador) {
                         System.out.print(cartas.getNumero() + " " + cartas.getPalo() + " ");
                         System.out.println("");
-                        this.total += cartas.getNumero();
+                        if (verCombinacion(i) == true) {
+                            do {
+                                try {
+                                    System.out.println("Que Puntaje desea ? 11 o 21");
+                                    if (kbr.nextInt() == 11) {
+                                        this.total += 11;
+                                        break;
+                                    } else if (kbr.nextInt() == 21) {
+                                        this.total += 21;
+                                        break;
+                                    }
+                                } catch (InputMismatchException e) {
+                                    System.out.println("Solo puedes Ingresar 11 o 21");
+                                }
+                            } while (turno);
+                        }else{
+                            this.total += cartas.getNumero();
+                        }
                         
+
                     }
-                    if (verCombinacion(i) == true) {
-                        System.out.println("Encontre una A y K");
-                        
-                    }
+
                     System.out.println("Total: " + this.total);
                     OUTER:
-                    do {
-                        try {
-                            System.out.println("Desea Sacar otra Carta ? SI-NO");
-                            String otra = kbr.next();
-                            switch (otra) {
-                                case "si":
-                                    otraCarta = true;
-                                    break OUTER;
-                                case "no":
-                                    System.out.println("Termina tu turno");
-                                    System.out.println("=================");
-                                    otraCarta = false;
-                                    turno = false;
-                                    break OUTER;
+                    if (cuentaValues(this.total) == true) {
+                        otraCarta = false;
+                        turno = false;
+                        break;
+
+                    } else {
+                        do {
+                            try {
+                                System.out.println("Desea Sacar otra Carta ? SI-NO");
+                                String otra = kbr.next();
+                                switch (otra) {
+                                    case "si":
+                                        otraCarta = true;
+                                        break OUTER;
+                                    case "no":
+                                        System.out.println("Termina tu turno");
+                                        System.out.println("=================");
+                                        otraCarta = false;
+                                        turno = false;
+                                        break OUTER;
+                                }
+                            } catch (InputMismatchException e) {
+                                System.out.println("Debes Ingresar solo Letras y las palabras reservadas SI o NO");
+                                kbr.nextLine();
+                                continue;
                             }
-                        } catch (InputMismatchException e) {
-                            System.out.println("Debes Ingresar solo Letras y las palabras reservadas SI o NO");
-                            kbr.nextLine();
-                            continue;
-                        }
-                    } while (true);
+                        } while (true);
+                    }
                 }
 
             }
@@ -121,17 +143,47 @@ public class blackjack {
 
     }
 
+    private boolean cuentaValues(int total) {
+        this.total = total;
+        if (this.total > 21) {
+            System.out.println("Te Pasaste Has sido Eliminado de la ronda");
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     private boolean verCombinacion(int pos) {
+        int posicionAs;
+        int posicionK;
         boolean combinacion = false;
         this.manoJugador = this.jugadores.get(pos).getManoJugador();
         for (int i = 0; i < manoJugador.size(); i++) {
             if (this.manoJugador.get(i).getNumero() == 1) {
                 System.out.println("Encontre un AS!");
-                if(this.manoJugador.get(i).getNumero()==13){
-                    System.out.println("Encontre una K");
-                    combinacion = true;
+                posicionAs = i;
+                for (int j = 0; j < this.manoJugador.size(); j++) {
+                    if (j == posicionAs) {
+                        j++;
+                    } else if (this.manoJugador.get(j).getNumero() == 13 && this.manoJugador.get(j).getPalo().equals(this.manoJugador.get(posicionAs).getPalo())) {
+                        System.out.println("Encontre una combinacion AS y K del mismo Palo");
+                        combinacion = true;
+                    }
                 }
             }
+            if (this.manoJugador.get(i).getNumero() == 13) {
+                System.out.println("Encontre un K!");
+                posicionK = i;
+                for (int j = 0; j < this.manoJugador.size(); j++) {
+                    if (j == posicionK) {
+                        j++;
+                    } else if (this.manoJugador.get(j).getNumero() == 1 && this.manoJugador.get(j).getPalo().equals(this.manoJugador.get(posicionK).getPalo())) {
+                        System.out.println("Encontre una combinacion AS y K del mismo Palo");
+                        combinacion = true;
+                    }
+                }
+            }
+
         }
 
         return combinacion;
